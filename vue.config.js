@@ -1,3 +1,5 @@
+const apiProxyTarget = process.env.VUE_APP_API_PROXY_TARGET || 'http://host.docker.internal:8888/';
+
 module.exports = {
   baseUrl: process.env.NODE_ENV === 'production' ? '/' : '/',
   outputDir: 'user',
@@ -11,7 +13,7 @@ module.exports = {
 
     proxy: {
       '/api': {
-        target: 'http://localhost:8080/', // 开发环境下使用
+        target: apiProxyTarget, // Docker 中默认指向宿主机 8888，可通过环境变量覆盖
         // target: 'http://39.104.22.73:8888/', // 生产环境下需要根据实际情况修改
         changeOrigin: true, //改变源
         pathRewrite: {
